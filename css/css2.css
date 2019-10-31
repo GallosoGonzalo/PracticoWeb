@@ -1,0 +1,47 @@
+@media (min-width: 1024px)  {
+    .link{
+        margin-left: 50px;
+        font-size: 20px;
+    }
+    .logout {
+        margin-left:350px;
+        font-size: 20px;
+    }
+    .boutique{
+        font-size: 25px;
+    }
+    .form-insertar{
+        margin-left:1px;
+    }
+    .contenedor{
+        width: 20%;
+        height: 40%;
+    }
+    
+}
+.home{
+    font-size: 25px;
+    margin-left: 250px;
+}
+.logo{
+     width: 20%;
+     height: 40%;
+ }
+.carrusel{
+    width: 100%;
+    height: 300px !important; 
+}
+section{
+    margin-top: 50px;
+}
+.card{
+    padding-bottom: 30px !important;
+}
+.form{
+    padding-top: 50px !important;
+    padding-bottom: 30px !important; 
+}
+
+button{
+    margin-left: 10px !important;
+}
