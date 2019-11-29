@@ -1,5 +1,5 @@
     {include file="header.tpl"}
-    <section id="contenedor">
+    <section class="contenedor">
     <form action="iniciarSesion" method="POST" role="form">
         <div class="form-group">
             <label for="email">Usuario:</label>
@@ -12,9 +12,9 @@
             <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
             Ingresar
             </button>
+            <a class="btn btn-primary btnreg" href="Registrar">Registrarme <span class="sr-only"></span></a>
         </form>
     </section>
-    </body>
 
     {include file="footer.tpl"}
 </html>

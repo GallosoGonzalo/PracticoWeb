@@ -7,6 +7,13 @@
                 <link rel="stylesheet" href="librerias/css/bootstrap.min.css">
                 <link rel="stylesheet" href="librerias/css/style.css">
                 <link rel="stylesheet" href="css/css2.css">
+                <script src="librerias/jquery-3.4.1.min.js"></script>
+                <script src="librerias/popper.min.js"></script>
+                <script src="librerias/js/bootstrap.min.js"></script>
+
+                <!-- development version, includes helpful console warnings -->
+               <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
                 <base href='{$BASE_URL}' >
 
                 <title>{$titulo}</title>
@@ -33,9 +40,6 @@
       </li>
        <li class="nav-item active">
         <a class="nav-link link" href="login">Login <span class="sr-only"></span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link logout" href="login">Logout <span class="sr-only"></span></a>
       </li>
     </ul>
   </div>

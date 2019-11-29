@@ -20,11 +20,13 @@ class UserView {
         $smarty->assign('BASE_URL',BASE_URL);
         $smarty->display('templates/registro.tpl');
     }
-    public function DisplayHome(){
+    public function DisplayUsuario($usuarios,$loged){
         $smarty = new Smarty();
-        $smarty->assign('titulo',"Home");
+        $smarty->assign('titulo',"admin");
         $smarty->assign('BASE_URL',BASE_URL);
-        $smarty->display('templates/home.tpl');
+        $smarty->assign('usuario',$usuarios);
+        $smarty->assign('admin',$loged);
+        $smarty->display('templates/admin.tpl');
     }
 }
 ?>

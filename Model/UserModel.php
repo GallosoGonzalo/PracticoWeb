@@ -15,10 +15,26 @@ class UserModel {
         
         return $password;
     }
+
+    function traerUsuario(){
+        $sentencia = $this->db->prepare(" SELECT * FROM usuario ");
+        $sentencia->execute();
+        $usuarios = $sentencia->fetchAll(PDO::FETCH_OBJ);   
+        return $usuarios;   
+    }
     function Registrarusuario($usuario,$pass){
         $hash = password_hash($pass, PASSWORD_DEFAULT);
-        $sentencia = $this->db->prepare("INSERT INTO usuario(usuario,pass) VALUES(?,?)");
-        $sentencia->execute(array($usuario,$hash));
+        $tipoUser = "Usuario";
+        $sentencia = $this->db->prepare("INSERT INTO usuario(usuario,pass,tipouser) VALUES(?,?,?)");
+        $sentencia->execute(array($usuario,$hash,$tipoUser));
+    }
+    function borrarUsuario($id){
+        $sentencia = $this->db->prepare("DELETE FROM usuario WHERE id_usuario=?");
+        $sentencia->execute(array($id));
+    }
+    function modificarUsuario($id){
+        $sentencia = $this->db->prepare("UPDATE usuario SET tipouser = ? WHERE id_usuario=?");
+        $sentencia->execute(array($_POST['tipoUser'],$id));
     }
 }
 

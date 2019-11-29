@@ -11,7 +11,6 @@ class UserController {
         $this->model = new UserModel();
         $this->view = new UserView();
     }
-    
     public function IniciarSesion(){
         $password = $_POST['pass'];
         $usuario = $this->model->getPassword($_POST['user']);
@@ -19,14 +18,41 @@ class UserController {
                 session_start();
                 $_SESSION['user'] = $usuario->usuario;
                 $_SESSION['userId'] = $usuario->id_usuario;
+                $_SESSION['admin']=$usuario->tipouser;
                 header("Location: " . URL_LISTA);
             }
             else{
                 header("Location: " . URL_LOGIN);
                 }
                                                                                                                                                                                              
+           }    
+           public function checarusuario(){
+            session_start();
+            if (isset($_SESSION['userId'])) {
+                if($_SESSION['admin']=="Administrador"){
+    
+                return "Administrador";
+                }
+                
+                else if($_SESSION['admin']=="Usuario"){
+                    return "Usuario";
+                }
+            }
            }
-
+           public function checkLogIn(){
+            session_start();
+            
+            if(!isset($_SESSION['userId'])){
+                header("Location: " . URL_LOGIN);
+                die();
+            }
+    
+            if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1000)) { 
+                header("Location: " . URL_LOGOUT);
+                die(); // destruye la sesión, y vuelve al login
+            } 
+            $_SESSION['LAST_ACTIVITY'] = time();
+        }
     public function Login(){
         $this->view->DisplayLogin();
     }
@@ -40,14 +66,25 @@ class UserController {
     public function Registrar(){
         $this->view->DisplayRegistro();
     }
-    public function Home(){
-        $this->view->DisplayHome();
+   
+    public function getUsuario(){
+        $loged = $this->checarusuario();
+        $usuarios = $this->model->traerUsuario();
+        $this->view->DisplayUsuario($usuarios,$loged);
     }
-    
     function addRegistro(){
-        $this->model->Registrarusuario($_POST['usuario'],$_POST['pass']);   
-        header("Location: " . URL_LOGIN);
+        $this->model->Registrarusuario($_POST['user'],$_POST['pass']); 
+        $this->IniciarSesion();
     }
+    function deleteUsuario($id){
+        $this->checkLogIn();
+        $this->model->borrarUsuario($id);
+        header("Location: " . URL_USUARIOS);
 }
-
+    function modifyUsuario($id){
+        $this->checkLogIn();
+        $this->model->modificarUsuario($id);
+        header("Location: " . URL_USUARIOS);
+}
+}
 ?>
