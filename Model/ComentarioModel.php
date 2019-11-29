@@ -9,7 +9,7 @@ class ComentarioModel {
     }
   
     public function traerComentarios(){
-        $sentencia=$this->db->prepare("SELECT comentarios.*, producto.* FROM comentarios INNER JOIN producto ON comentarios.producto_fk = producto.id_producto");
+        $sentencia=$this->db->prepare("SELECT comentarios.*, producto.* FROM comentarios INNER JOIN producto ON comentarios.producto_fk = producto.id_producto) ORDER BY puntaje")  ;
         $sentencia->execute();
         $Comentario=$sentencia->fetchAll(PDO::FETCH_OBJ);
         return $Comentario;

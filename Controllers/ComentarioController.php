@@ -21,13 +21,9 @@ class ComentarioController {
     public function getComentarios(){
         $comentario = $this->model->traerComentarios();
         $producto = $this->modelp->traerProducto();
-        $this->view->DisplayComentarios($comentario,$producto);
+        $usuario = $this->user->checarusuario();
+        $this->view->DisplayComentarios($comentario,$producto,$usuario);
     
-    }
-    public function getComentario($id){
-        $comentario = $this->model->traerComentarios();
-        $producto = $this->model->getComentario($id);
-        $this->view->DisplayComentarios($comentario,$producto);
     }
 
     function agregarComentario(){

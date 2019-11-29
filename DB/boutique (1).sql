@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 31-10-2019 a las 23:40:09
+-- Tiempo de generación: 29-11-2019 a las 03:17:17
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.10
 
@@ -38,9 +38,31 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id_categoria`, `categoria`) VALUES
-(18, 'Buzo'),
 (19, 'Jean'),
-(20, 'Zapatillas');
+(20, 'Zapatillas'),
+(21, 'Buzo'),
+(23, 'Relojes');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_comentario` int(11) NOT NULL,
+  `comentario` varchar(250) NOT NULL,
+  `puntaje` int(11) NOT NULL,
+  `producto_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_comentario`, `comentario`, `puntaje`, `producto_fk`) VALUES
+(12, 'HOLA', 2, 134),
+(13, 'ada', 5, 135);
 
 -- --------------------------------------------------------
 
@@ -54,6 +76,7 @@ CREATE TABLE `producto` (
   `descripcion` varchar(50) NOT NULL,
   `marca` varchar(50) NOT NULL,
   `precio` varchar(11) NOT NULL,
+  `imagen` varchar(250) NOT NULL,
   `id_catego` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -61,11 +84,10 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `marca`, `precio`, `id_catego`) VALUES
-(68, 'Jean', 'Jean de dama tiro alto', 'Levis', '$400', 19),
-(69, 'Airmax', 'Zapatillas deportivas', 'Nike', '$2000', 20),
-(70, 'Zapato', 'Zapato para iestas, muy elegante', 'Vicente', '$3000', 20),
-(71, 'Buzo canguro', 'Buzo estilo canguro', 'Adidas', '$1400', 18);
+INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `marca`, `precio`, `imagen`, `id_catego`) VALUES
+(134, '23', '2', '2', '$23', 'img/5de069ab00c79.jpg', 19),
+(135, 'jasdkad', 'asd', 'asd', '$asd', 'img/5de07bbe1891c.jpg', 19),
+(136, 'asd', 'asd', '23', '$2', 'img/5de07bd7154b4.jpg', 19);
 
 -- --------------------------------------------------------
 
@@ -75,16 +97,19 @@ INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `marca`, `precio
 
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
-  `usuario` varchar(11) NOT NULL,
-  `pass` varchar(150) NOT NULL
+  `usuario` varchar(50) NOT NULL,
+  `pass` varchar(150) NOT NULL,
+  `tipouser` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `usuario`, `pass`) VALUES
-(26, 'gonzalo', '$2y$10$HDi.RkWSJdrWJoNfeOwS2ux.TAHlRdcgfDCewMoPU9HevaAhQbkTe');
+INSERT INTO `usuario` (`id_usuario`, `usuario`, `pass`, `tipouser`) VALUES
+(52, 'gonzalo', '$2y$10$LCXH04AIKgE2SzWE0D46ZeuUQaqwOinaHMK2noESy8jQ56tmQ8Egi', 'Administrador'),
+(66, 'asd', '$2y$10$yIoZMDtwubh7JFjtq9QDJ.UHOccJ.m.zJNjB74rsVzMXJm7TRDIT2', 'Usuario'),
+(67, 'asd', '$2y$10$ZCfhUq1uNdA8gjPWnIWWguPQpz60.dd/d2RQxbTdxthDtQRjAO9bW', 'Usuario');
 
 --
 -- Índices para tablas volcadas
@@ -95,6 +120,13 @@ INSERT INTO `usuario` (`id_usuario`, `usuario`, `pass`) VALUES
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `producto_fk` (`producto_fk`);
 
 --
 -- Indices de la tabla `producto`
@@ -117,29 +149,35 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `producto`
+-- Filtros para la tabla `comentarios`
 --
-ALTER TABLE `producto`
-  ADD CONSTRAINT `asd` FOREIGN KEY (`id_catego`) REFERENCES `categoria` (`id_categoria`);
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `asdads` FOREIGN KEY (`producto_fk`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

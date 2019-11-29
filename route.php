@@ -82,7 +82,7 @@ if($action == ''){
             $controllerComentario->getComentarios();
         }
         elseif($partesURL[0] == "insertarcome") {
-            $controllerComentario->agregarComentario($_POST['idproducto']);
+            $controllerComentario->agregarComentario();
         }
     }
 }

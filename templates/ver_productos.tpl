@@ -49,7 +49,6 @@
                     {if isset($productos->imagen)}
                     <td> <img src="{$productos->imagen}"/> 
                     <form action="comentario" method="post">
-                    <input type="hidden" name="idproducto" value="{$productoss->id_producto}">
                     <input type="submit" value="Comentarios">
                     </form></td>
                     {/if}
