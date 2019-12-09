@@ -14,9 +14,8 @@
                 <!-- development version, includes helpful console warnings -->
                <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-                <base href='{$BASE_URL}' >
-
-                <title>{$titulo}</title>
+              <base href='.BASE_URL.' >
+              <title>Document</title>
             </head>
             <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

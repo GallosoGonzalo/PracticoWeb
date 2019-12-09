@@ -36,8 +36,8 @@
                     <th scope="col">Imagen</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Precio</th>
                     <th scope="col">Marca</th>
+                    <th scope="col">Precio</th>
                     <th scope="col">Categoria</th>
                     
 
@@ -48,9 +48,12 @@
                 <tr>
                     {if isset($productos->imagen)}
                     <td> <img src="{$productos->imagen}"/> 
+                    
+                    <label class="idp" id={$productos->id_producto}></label>
                     <form action="comentario" method="post">
-                    <input type="submit" value="Comentarios">
-                    </form></td>
+                    <input type="hidden" name="idproducto" value="{$productos->id_producto}">
+                    <input type="submit" class="btn btn-dark col-lg-8" value="Comentarios">
+                     </form>
                     {/if}
                     <td>{$productos->nombre}</td>
                     <td>{$productos->descripcion}</td>

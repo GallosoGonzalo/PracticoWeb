@@ -8,9 +8,9 @@ class ProductosModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=boutique;charset=utf8', 'root', '');
     }
 
-    public function get($id_producto) {
+    public function get($id) {
         $query = $this->db->prepare('SELECT * FROM producto WHERE id_producto = ?');
-        $query->execute(array($id_producto));
+        $query->execute(array($id));
         return $query->fetch(PDO::FETCH_OBJ);
     }
 

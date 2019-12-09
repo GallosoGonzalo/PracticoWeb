@@ -39,13 +39,12 @@ class BoutiqueView {
         $smarty->assign('BASE_URL',BASE_URL);
         $smarty->display('templates/home.tpl');
     }
-    public function DisplayComentarios($comentario,$producto,$usuario){
+    public function DisplayComentarios($producto,$usuario){
         $smarty = new Smarty();
         $smarty->assign('titulo',"comentario");
         $smarty->assign('BASE_URL',BASE_URL);
-        $smarty->assign('producto',$usuario);
+        $smarty->assign('isLogged',$usuario);
         $smarty->assign('producto',$producto);
-        $smarty->assign('comentario',$comentario);
         $smarty->display('templates/ver_comentarios.tpl');
     }
 

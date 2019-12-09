@@ -1,8 +1,8 @@
 <?php
-require_once("/Model/ComentarioModel.php");
-require_once("/api/json.view.php");
+require_once("./Model/ComentarioModel.php");
+require_once("./api/jsonView.php");
 
-class TaskApiController {
+class comentarioApiController {
 
     private $model;
     private $view;
@@ -18,22 +18,28 @@ class TaskApiController {
         return json_decode($this->data);
     }
 
-    public function insertComentario($params = []){
+    public function  getComentarios($params = null) {
+        $comments = $this->model->getComentarios();
+        $this->view->response($comments, 200);
+    }
+
+    public function getComentario($params = null) {
+        $id = $params[':ID'];
+        $comentario = $this->model->getComentario($id);        
+        if ($comentario)
+            $this->view->response($comentario, 200);
+        else
+            $this->view->response("El comentario con el id={$id} no existe", 404);
+    } 
+    public function insertComentario($params = null) {
         $body = $this->getData();
-        //inserta el comentario;
-        $comentario = $body->comentario;
-        $puntaje = $body->puntaje;
-        $id_prodcto = $body->producto_fk;
-        $comentarios = $this->model-> insertarComentario($comentario,$puntaje,$id_producto);
-    }
-    public function getComentarios($params=null){
-        $comentario = $this->model->traerComentarios();
-        $this->view-> response($comentario, 200);
-    }
-    public function getComentario($params = []){
-        $comentarios = $params[':ID'];
-        $comentario= $this->model->getComentario($id);
-        $this->view->response($comentario, 200);
+        $id = $this->model->insertarComentario($body->comentario, $body->puntaje, $body->id_producto);
+        $comentario = $this->model->getComentario($id);
+        if ($comentario)
+            $this->view->response($comentario, 200);
+        else
+            $this->view->response("El comentario no fue creado", 500);
+
     }
     public function deleteComentario($params = null){
         $id = $params[':ID'];
@@ -46,5 +52,5 @@ class TaskApiController {
         }
     }
    }
-}
+
 

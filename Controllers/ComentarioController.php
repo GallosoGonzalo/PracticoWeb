@@ -18,17 +18,16 @@ class ComentarioController {
         $this->user = new UserController();
         $this->modelp = new ProductosModel();
     }
-    public function getComentarios(){
-        $comentario = $this->model->traerComentarios();
-        $producto = $this->modelp->traerProducto();
+    public function getComentarios($id){
+        $producto = $this->model->getProducto($id);
         $usuario = $this->user->checarusuario();
-        $this->view->DisplayComentarios($comentario,$producto,$usuario);
+        $this->view->DisplayComentarios($producto,$usuario);
     
     }
 
-    function agregarComentario(){
+    function agregarComentario($id){
         $this->user->checkLogIn();
-     $sentencia = $this->model->insertarComentario($_POST['comentario'],$_POST['puntaje'],$_POST['idproducto']);
+     $sentencia = $this->model->insertarComentario($_POST['comentario'],$_POST['puntaje'],$id);
     }
 
     function deleteComentario($id){

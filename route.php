@@ -78,12 +78,12 @@ if($action == ''){
         elseif($partesURL[0] == "modificarc") {
             $controllerCategoria->modifyCategoria($partesURL[1]);
         }
-        elseif($partesURL[0] == "comentario") {
-            $controllerComentario->getComentarios();
-        }
+        elseif($partesURL[0] == 'comentario'){
+            $controllerComentario->getComentarios($_POST['idproducto']);       
+     }
         elseif($partesURL[0] == "insertarcome") {
-            $controllerComentario->agregarComentario();
+            $controllerComentario->agregarComentario($_POST['idproducto']);
         }
-    }
+    }   
 }
 ?>

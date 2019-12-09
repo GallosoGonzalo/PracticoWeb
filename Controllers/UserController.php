@@ -26,6 +26,7 @@ class UserController {
                 }
                                                                                                                                                                                              
            }    
+
            public function checarusuario(){
             session_start();
             if (isset($_SESSION['userId'])) {
@@ -37,6 +38,9 @@ class UserController {
                 else if($_SESSION['admin']=="Usuario"){
                     return "Usuario";
                 }
+            }
+            else {
+                return "anonimo";
             }
            }
            public function checkLogIn(){
